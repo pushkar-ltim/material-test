@@ -17,16 +17,23 @@ export class MaterialTablePracticeComponent {
     'toggleAction'
   ];
 
+
+
   moveableColumns = [
     'qty',
     'value',
     'sedol',
-  ];
+    
+  ]
 
-  stickyColumns = [
+  childDisplayedColumns = [
     'name',
+    'qty',
+    'value',
+    'sedol',
     'toggleAction'
   ];
+
 
 }
 
