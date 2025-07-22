@@ -1,12 +1,28 @@
 .mat-mdc-header-row,
 .mat-mdc-footer-row,
 .mat-mdc-row {
-  min-width: 3000px; 
+  min-width: 100px; 
 }
-
 
 .mat-mdc-table-sticky {
   background: #59abfd;
   opacity: 1;
 }
 
+.no-overflow {
+    overflow: visible;
+}
+
+.mat-column-name {
+    max-width: fit-content;
+    filter: drop-shadow(4px 0 2px rgba(0, 0, 0, 0.2));
+}
+
+.mat-column-toggleAction {
+    max-width: 10vw;
+    filter: drop-shadow(4px 0 2px rgba(0, 0, 0, 0.2));
+}
+
+.mdc-data-table__cell, .mdc-data-table__header-cell{
+    border-bottom-style: none;
+}

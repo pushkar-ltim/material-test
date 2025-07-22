@@ -1,46 +1,31 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-material-table-practice',
   templateUrl: './material-table-practice.component.html',
-  styleUrls: ['./material-table-practice.component.scss']
+  styleUrls: ['./material-table-practice.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MaterialTablePracticeComponent {
+export class MaterialTablePracticeComponent implements OnInit {
+
+  constructor(private cd: ChangeDetectorRef) { }
+
+  ngOnInit(): void {
+    // setTimeout(() => {
+    //   this.displayedColumns = ['name',
+    //     'qty',
+    //     'value',
+    //     'sedol', 'toggleAction',];
+    //     this.cd.markForCheck();
+    // }, 2000);
+  }
 
   dataSource = HOLDINGS_DATA;
 
   displayedColumns = [
     'name',
     'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
+
     'toggleAction'
   ];
 
@@ -50,7 +35,7 @@ export class MaterialTablePracticeComponent {
     'qty',
     'value',
     'sedol',
-    
+
   ]
 
   childDisplayedColumns = [
@@ -82,7 +67,7 @@ export interface Holding {
 
 const HOLDINGS_DATA: Holding[] = [
   {
-    name: 'Vanguard S&P 500 ETF',
+    name: 'Vanguard S&P 500 ETF Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua Ut Enim Ad Minim Veniam ',
     sedol: '2193502',
     qty: 150,
     value: 63150.00,
