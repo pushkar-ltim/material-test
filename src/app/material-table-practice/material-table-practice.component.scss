@@ -4,25 +4,33 @@
   min-width: 100px; 
 }
 
+.holdings-table {
+  min-width: 100%;
+
+  overflow-x: auto;
+}
+
 .mat-mdc-table-sticky {
   background: #59abfd;
   opacity: 1;
 }
 
-.no-overflow {
-    overflow: visible;
-}
-
-.mat-column-name {
-    max-width: fit-content;
-    filter: drop-shadow(4px 0 2px rgba(0, 0, 0, 0.2));
+.mdc-data-table__cell, .mdc-data-table__header-cell{
+    border-bottom-style: none;
+    min-width: 100px;
 }
 
 .mat-column-toggleAction {
-    max-width: 10vw;
+    min-width: 10vw;
+    filter: drop-shadow(-4px 0 2px rgba(0, 0, 0, 0.2));
+}
+
+.mat-column-name {
+    min-width: 20vw;
     filter: drop-shadow(4px 0 2px rgba(0, 0, 0, 0.2));
 }
 
-.mdc-data-table__cell, .mdc-data-table__header-cell{
-    border-bottom-style: none;
+
+.holdings-table-container {
+  overflow: auto;
 }

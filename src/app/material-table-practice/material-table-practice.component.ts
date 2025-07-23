@@ -25,7 +25,21 @@ export class MaterialTablePracticeComponent implements OnInit {
   displayedColumns = [
     'name',
     'qty',
-
+    'value',
+    'sedol','qty',
+    'value',
+    'sedol','qty',
+    'value',
+    'sedol','qty',
+    'value',
+    'sedol','qty',
+    'value',
+    'sedol','qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
     'toggleAction'
   ];
 
@@ -35,7 +49,6 @@ export class MaterialTablePracticeComponent implements OnInit {
     'qty',
     'value',
     'sedol',
-
   ]
 
   childDisplayedColumns = [
@@ -67,7 +80,7 @@ export interface Holding {
 
 const HOLDINGS_DATA: Holding[] = [
   {
-    name: 'Vanguard S&P 500 ETF Lorem Ipsum Dolor Sit Amet Consectetur Adipiscing Elit Sed Do Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua Ut Enim Ad Minim Veniam ',
+    name: 'Vanguard S&P 500 ETF',
     sedol: '2193502',
     qty: 150,
     value: 63150.00,

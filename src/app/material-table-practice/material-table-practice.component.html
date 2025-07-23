@@ -1,3 +1,7 @@
+<section>
+
+</section>
+
 <section class="holdings-table-container ">
     <mat-table [dataSource]="dataSource" multiTemplateDataRows >
 
@@ -31,13 +35,12 @@
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="accounts">
+        <!-- <ng-container matColumnDef="accounts">
             <mat-cell [attr.colspan]="displayedColumns.length" *matCellDef="let holding"
                 style="padding-left: 0; padding-right: 0;" class="no-overflow">
                 <mat-table [dataSource]="holding.accounts" class="accounts-child-table" >
 
-                    <ng-container [matColumnDef]="'name'" sticky sticky="width:250px">
-                        <!-- <mat-header-cell *matHeaderCellDef> Name </mat-header-cell> -->
+                    <ng-container [matColumnDef]="'name'" sticky>
                         <mat-cell *matCellDef="let holdingRow">
                             {{ holdingRow.name }}
                         </mat-cell>
@@ -45,7 +48,6 @@
 
                     <ng-container *ngFor="let column of moveableColumns">
                         <ng-container [matColumnDef]="column">
-                            <!-- <mat-header-cell *matHeaderCellDef> {{column}} </mat-header-cell> -->
                             <mat-cell *matCellDef="let accountRow">
                                 {{ accountRow[column] }}
                             </mat-cell>
@@ -53,21 +55,19 @@
                     </ng-container>
 
                     <ng-container [matColumnDef]="'toggleAction'" stickyEnd>
-                        <!-- <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell> -->
                         <mat-cell *matCellDef="let holdingRow">
                             <button>Toggle</button>
                         </mat-cell>
                     </ng-container>
 
-                    <!-- <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row> -->
                     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
                 </mat-table>
             </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns" ></mat-row>
-        <mat-row *matRowDef="let row; columns: ['accounts'];" ></mat-row>
+        <!-- <mat-row *matRowDef="let row; columns: ['accounts'];" ></mat-row> -->
 
     </mat-table>
 
