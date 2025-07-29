@@ -37,7 +37,7 @@
 
         <ng-container matColumnDef="accounts">
             <mat-cell [attr.colspan]="displayedColumns.length" *matCellDef="let holding"
-                style="padding-left: 0; padding-right: 0;" class="no-overflow">
+                style="padding-left: 0; padding-right: 0;" >
                 <mat-table [dataSource]="holding.accounts" class="accounts-child-table">
 
                     <ng-container [matColumnDef]="'name'" sticky>
