@@ -8,18 +8,23 @@ import { MaterialTablePracticeComponent } from './material-table-practice/materi
 
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
+import { MaterialCdkDragDropPracticeComponent } from './material-cdk-drag-drop-practice/material-cdk-drag-drop-practice.component';
+import {MatIconModule} from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    MaterialTablePracticeComponent
+    MaterialTablePracticeComponent,
+    MaterialCdkDragDropPracticeComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

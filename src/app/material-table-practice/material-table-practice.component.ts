@@ -11,13 +11,6 @@ export class MaterialTablePracticeComponent implements OnInit {
   constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    // setTimeout(() => {
-    //   this.displayedColumns = ['name',
-    //     'qty',
-    //     'value',
-    //     'sedol', 'toggleAction',];
-    //     this.cd.markForCheck();
-    // }, 2000);
   }
 
   dataSource = HOLDINGS_DATA;
@@ -26,15 +19,20 @@ export class MaterialTablePracticeComponent implements OnInit {
     'name',
     'qty',
     'value',
-    'sedol','qty',
+    'sedol',
+    'qty',
     'value',
-    'sedol','qty',
+    'sedol',
+    'qty',
     'value',
-    'sedol','qty',
+    'sedol',
+    'qty',
     'value',
-    'sedol','qty',
+    'sedol',
+    'qty',
     'value',
-    'sedol','qty',
+    'sedol',
+    'qty',
     'value',
     'sedol',
     'qty',
@@ -42,8 +40,6 @@ export class MaterialTablePracticeComponent implements OnInit {
     'sedol',
     'toggleAction'
   ];
-
-
 
   moveableColumns = [
     'qty',
@@ -58,8 +54,7 @@ export class MaterialTablePracticeComponent implements OnInit {
     'sedol',
     'toggleAction'
   ];
-
-
+  
 }
 
 export interface Account {
@@ -85,8 +80,8 @@ const HOLDINGS_DATA: Holding[] = [
     qty: 150,
     value: 63150.00,
     accounts: [
-      { name: 'Retirement Fund - 101', sedol: '2193502', qty: 100, value: 42100.00 },
-      { name: 'Taxable Brokerage - 203', sedol: '2193502', qty: 50, value: 21050.00 }
+      { name: 'Account 11', sedol: '2193502', qty: 100, value: 42100.00 },
+      { name: 'Account 13', sedol: '2193502', qty: 50, value: 21050.00 }
     ]
   },
   {
@@ -95,8 +90,8 @@ const HOLDINGS_DATA: Holding[] = [
     qty: 325,
     value: 61750.00,
     accounts: [
-      { name: 'Retirement Fund - 101', sedol: 'B01S1K7', qty: 200, value: 38000.00 },
-      { name: 'Trust Account - 405', sedol: 'B01S1K7', qty: 125, value: 23750.00 }
+      { name: 'Account 1', sedol: 'B01S1K7', qty: 200, value: 38000.00 },
+      { name: 'Account 2', sedol: 'B01S1K7', qty: 125, value: 23750.00 }
     ]
   },
   {
@@ -105,8 +100,8 @@ const HOLDINGS_DATA: Holding[] = [
     qty: 75,
     value: 13125.00,
     accounts: [
-      { name: 'Taxable Brokerage - 203', sedol: '2046251', qty: 50, value: 8750.00 },
-      { name: 'Custodial Account - 512', sedol: '2046251', qty: 25, value: 4375.00 }
+      { name: 'Account 1', sedol: '2046251', qty: 50, value: 8750.00 },
+      { name: 'Account 2', sedol: '2046251', qty: 25, value: 4375.00 }
     ]
   }
 ];

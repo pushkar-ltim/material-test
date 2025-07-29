@@ -1,0 +1,30 @@
+.list-item-content {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.scrollable-div {
+    max-height: calc(var(--list-item-height) * var(--max-visible-items));
+    overflow-y: auto;
+}
+
+.columns-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;;
+
+    &__selected {
+        > .list-item {
+            border-bottom: 2px solid orange;
+        }
+    }
+
+    &__unselected {
+        > .list-item {
+            border-bottom: 2px solid gray;
+        }
+    }
+
+}

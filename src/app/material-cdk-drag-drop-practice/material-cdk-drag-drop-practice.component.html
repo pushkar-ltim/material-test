@@ -1,0 +1,48 @@
+<div class="scrollable-div" 
+    [ngStyle]="{
+            '--list-item-height': LIST_ITEM_HEIGHT + 'px',
+            '--max-visible-items': ITEMS_TO_SHOW
+    }"
+>
+
+    <ol class="columns-list columns-list__selected" 
+        
+    >
+        <ng-container *ngFor="let column of selectedColumns">
+            <li class="list-item" #listItem>
+                <div class="list-item-content">
+                    <span>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+                    </span>
+                    <strong>
+                        {{ column.name }}
+                    </strong>
+                    <span>
+                        {{ column.description }}
+                    </span>
+                </div>
+            </li>
+        </ng-container>
+    </ol>
+
+    <ol class="columns-list columns-list__unselected" 
+        
+    > 
+        <ng-container *ngFor="let column of unselectedColumns">
+            <li class="list-item" #listItem>
+                <div class="list-item-content">
+                    <span>
+                        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+                    </span>
+                    <strong>
+                        {{ column.name }}
+                    </strong>
+                    <span>
+                        {{ column.description }}
+                    </span>
+                </div>
+            </li>
+        </ng-container>
+    </ol>
+
+</div>
