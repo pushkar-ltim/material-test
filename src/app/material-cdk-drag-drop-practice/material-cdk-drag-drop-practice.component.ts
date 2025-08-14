@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-material-cdk-drag-drop-practice',
@@ -17,11 +18,15 @@ export class MaterialCdkDragDropPracticeComponent implements OnInit, AfterViewIn
   ITEMS_TO_SHOW = 7;
   LIST_ITEM_HEIGHT = 48;
 
-  constructor(private cd: ChangeDetectorRef) {
+  form = this.fb.group([]);
+
+  constructor(private cd: ChangeDetectorRef, private fb: FormBuilder) {
 
   }
 
   ngOnInit(): void {
+
+    
   }
 
   ngAfterViewInit(): void {
@@ -30,6 +35,17 @@ export class MaterialCdkDragDropPracticeComponent implements OnInit, AfterViewIn
     }, 0);
   }
 
+  selectColumn() {
+
+  }
+
+  unselectColumn() {
+
+  }
+
+  checkboxClick() {
+    
+  }
 
   getSelectedColumns(): Column[] {
     const shuffled = [...this.allColumnsInDefaultOrder].sort(() => 0.5 - Math.random());
@@ -48,15 +64,9 @@ export class MaterialCdkDragDropPracticeComponent implements OnInit, AfterViewIn
     const firstItem = this.listItems.first.nativeElement as HTMLElement;
     const itemHeight = firstItem.offsetHeight;
 
-    console.log(`First item height is ${itemHeight}px.`);
-
-    // The ONLY thing this function does is set our public property.
-    // The template takes care of the rest.
     this.LIST_ITEM_HEIGHT = itemHeight;
 
     this.cd.markForCheck();
-
-    console.log(`Item height is ${itemHeight}px. Setting listMaxHeight property to ${this.LIST_ITEM_HEIGHT}.`);
   }
 
 }
@@ -66,17 +76,18 @@ export interface Column {
   name: string;
   description: string;
   order: number;
+  isSelected?: boolean;
 }
 
 export const COLUMNS: Column[] = [
-  { id: 'name', name: 'Name', description: 'The name of the column', order: 1 },
-  { id: 'qty', name: 'Quantity', description: 'The quantity of items', order: 2 },
-  { id: 'value', name: 'Value', description: 'The value of the items', order: 3 },
-  { id: 'sedol', name: 'SEDOL', description: 'The SEDOL identifier', order: 4 },
-  { id: 'isin', name: 'ISIN', description: 'The ISIN identifier', order: 5 },
-  { id: 'cusip', name: 'CUSIP', description: 'The CUSIP identifier', order: 6 },
-  { id: 'date', name: 'Date', description: 'The date of the record', order: 7 },
-  { id: 'status', name: 'Status', description: 'The status of the item', order: 8 },
-  { id: 'type', name: 'Type', description: 'The type of the item', order: 9 },
-  { id: 'currency', name: 'Currency', description: 'The currency used', order: 10 }
+  { id: 'name', name: 'Name', description: 'The name of the column', order: 1, isSelected: true },
+  { id: 'qty', name: 'Quantity', description: 'The quantity of items', order: 2, isSelected: false },
+  { id: 'value', name: 'Value', description: 'The value of the items', order: 3, isSelected: true },
+  { id: 'sedol', name: 'SEDOL', description: 'The SEDOL identifier', order: 4, isSelected: true },
+  { id: 'isin', name: 'ISIN', description: 'The ISIN identifier', order: 5, isSelected: false },
+  { id: 'cusip', name: 'CUSIP', description: 'The CUSIP identifier', order: 6, isSelected: true },
+  { id: 'date', name: 'Date', description: 'The date of the record', order: 7, isSelected: false },
+  { id: 'status', name: 'Status', description: 'The status of the item', order: 8, isSelected: false },
+  { id: 'type', name: 'Type', description: 'The type of the item', order: 9, isSelected: false },
+  { id: 'currency', name: 'Currency', description: 'The currency used', order: 10, isSelected: false }
 ];
