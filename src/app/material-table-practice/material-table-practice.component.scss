@@ -6,7 +6,7 @@
 
 .holdings-table {
   min-width: 100%;
-  overflow-x: auto;
+  // overflow-x: auto;
 }
 
 .mat-mdc-table-sticky {
@@ -24,11 +24,23 @@
     filter: drop-shadow(-4px 0 2px rgba(0, 0, 0, 0.2));
 }
 
+.accounts-child-table {
+  min-width: 100%;
+  // overflow-x: auto;
+}
+
 .mat-column-name {
     min-width: 20vw;
     box-shadow: 0 0 15px rgba(0,0,0,0.75);
-    clip-path: inset(0 -15px 0 0);}
+    clip-path: inset(0 -15px 0 0);
+}
 
 .holdings-table-container {
   overflow: auto;
 }
+
+
+
+
+
+

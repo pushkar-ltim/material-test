@@ -15,6 +15,8 @@ export class MaterialTablePracticeComponent implements OnInit {
 
   dataSource = HOLDINGS_DATA;
 
+  expandedElement: Holding | null | undefined;
+
   displayedColumns = [
     'name',
     'qty',
@@ -38,7 +40,51 @@ export class MaterialTablePracticeComponent implements OnInit {
     'qty',
     'value',
     'sedol',
+    'qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
+    'qty',
+    'value',
+    'sedol',
     'toggleAction'
+  ];
+
+
+  childDisplayedColumns = [
+    ...this.displayedColumns
   ];
 
   moveableColumns = [
@@ -47,14 +93,10 @@ export class MaterialTablePracticeComponent implements OnInit {
     'sedol',
   ]
 
-  childDisplayedColumns = [
-    'name',
-    'qty',
-    'value',
-    'sedol',
-    'toggleAction'
-  ];
-  
+  expandedDetail = ['expandedDetail'];
+
+  isExpanded = (index: number, row: Holding) => true;
+
 }
 
 export interface Account {
@@ -62,6 +104,8 @@ export interface Account {
   sedol: string;
   qty: number;
   value: number;
+  [key: string]: string | number; // <-- Add this line
+
 }
 
 export interface Holding {

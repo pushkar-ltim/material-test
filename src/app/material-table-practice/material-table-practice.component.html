@@ -1,74 +1,51 @@
-<section>
+<section class="example-container holdings-table-container ">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
 
-</section>
-
-<section class="holdings-table-container ">
-    <mat-table [dataSource]="dataSource" multiTemplateDataRows >
-
+        <!-- Holding columns (existing code) -->
         <ng-container [matColumnDef]="'name'" sticky>
-            <mat-header-cell *matHeaderCellDef>
-                name
-            </mat-header-cell>
-            <mat-cell *matCellDef="let holdingRow">
-                {{ holdingRow.name }}
-            </mat-cell>
+            <th mat-header-cell *matHeaderCellDef>name</th>
+            <td mat-cell *matCellDef="let holdingRow">{{ holdingRow.name }}</td>
         </ng-container>
 
         <ng-container *ngFor="let column of moveableColumns">
             <ng-container [matColumnDef]="column">
-                <mat-header-cell *matHeaderCellDef>
-                    {{ column }}
-                </mat-header-cell>
-                <mat-cell *matCellDef="let holdingRow">
-                    {{ holdingRow[column] }}
-                </mat-cell>
+                <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+                <td mat-cell *matCellDef="let holdingRow">{{ holdingRow[column] }}</td>
             </ng-container>
         </ng-container>
 
         <ng-container [matColumnDef]="'toggleAction'" stickyEnd>
-            <mat-header-cell *matHeaderCellDef>
-                <button>Toggle</button>
-
-            </mat-header-cell>
-            <mat-cell *matCellDef="let holdingRow">
-                <button>Toggle</button>
-            </mat-cell>
+            <th mat-header-cell *matHeaderCellDef>
+                <button (click)="expandedElement = null">Collapse All</button>
+            </th>
+            <td mat-cell *matCellDef="let holdingRow">
+                <button (click)="expandedElement = expandedElement === holdingRow ? null : holdingRow">
+                    {{ expandedElement === holdingRow ? 'Hide Accounts' : 'Show Accounts' }}
+                </button>
+            </td>
         </ng-container>
 
-        <ng-container matColumnDef="accounts">
-            <mat-cell [attr.colspan]="displayedColumns.length" *matCellDef="let holding"
-                style="padding-left: 0; padding-right: 0;" >
-                <mat-table [dataSource]="holding.accounts" class="accounts-child-table">
-
-                    <ng-container [matColumnDef]="'name'" sticky>
-                        <mat-cell *matCellDef="let holdingRow">
-                            {{ holdingRow.name }}
-                        </mat-cell>
-                    </ng-container>
-
-                    <ng-container *ngFor="let column of moveableColumns">
-                        <ng-container [matColumnDef]="column">
-                            <mat-cell *matCellDef="let accountRow">
-                                {{ accountRow[column] }}
-                            </mat-cell>
-                        </ng-container>
-                    </ng-container>
-
-                    <ng-container [matColumnDef]="'toggleAction'" stickyEnd>
-                        <mat-cell *matCellDef="let holdingRow">
-                            <button>Toggle</button>
-                        </mat-cell>
-                    </ng-container>
-
-                    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-                </mat-table>
-            </mat-cell>
+        <!-- Detail row for accounts -->
+        <ng-container matColumnDef="detail">
+            <td mat-cell *matCellDef="let holdingRow" [attr.colspan]="displayedColumns.length">
+                <div *ngIf="holdingRow.accounts?.length">
+                    <ol class="accounts-child-table">
+                        <li *ngFor="let account of holdingRow.accounts" class="account-row detail-row">
+                            <td *ngFor="let column of displayedColumns">
+                                <strong>{{ column }}:</strong> {{ account[column] }}
+                            </td>
+                        </li>
+                    </ol>
+                </div>
+            </td>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns" ></mat-row>
-        <mat-row *matRowDef="let row; columns: ['accounts'];" ></mat-row>
-
-    </mat-table>
-
+        <!-- Header and row definitions -->
+        <th mat-header-row *matHeaderRowDef="displayedColumns"></th>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"
+            [class.expanded]="expandedElement === row"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['detail']; when: isExpanded"
+            class="account-row"
+            ></tr>
+    </table>
 </section>
