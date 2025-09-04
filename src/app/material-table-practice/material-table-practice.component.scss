@@ -5,8 +5,7 @@
 }
 
 .holdings-table {
-  min-width: 100%;
-  // overflow-x: auto;
+   min-width: max-content;
 }
 
 .mat-mdc-table-sticky {
@@ -24,20 +23,33 @@
     filter: drop-shadow(-4px 0 2px rgba(0, 0, 0, 0.2));
 }
 
-.accounts-child-table {
-  min-width: 100%;
-  overflow-x: scroll;
-}
-
 .mat-column-name {
     min-width: 20vw;
     box-shadow: 0 0 15px rgba(0,0,0,0.75);
     clip-path: inset(0 -15px 0 0);
 }
 
-.holdings-table-container {
-  overflow: auto;
+.parent-container {
+  max-width: 100%;
 }
+
+.parent-parent-container {
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+.holdings-table-container {
+  position: relative;
+}
+
+.table-scroll-wrapper {
+  overflow-x: auto;
+}
+
+.parent-parent-container, .parent-container, .holdings-table-container {
+  outline: 3px solid red;
+}
+
 
 
 
