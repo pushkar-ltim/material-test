@@ -20,34 +20,29 @@
 
 .mat-column-toggleAction {
     min-width: 10vw;
-    filter: drop-shadow(-4px 0 2px rgba(0, 0, 0, 0.2));
 }
 
 .mat-column-name {
+    position: relative;
+    overflow: visible;
     min-width: 20vw;
-    box-shadow: 0 0 15px rgba(0,0,0,0.75);
-    clip-path: inset(0 -15px 0 0);
 }
 
-.parent-container {
-  max-width: 100%;
-}
 
-.parent-parent-container {
-  margin-left: 10vw;
-  margin-right: 10vw;
-}
+.mat-column-name::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 8px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.15), // Start color (darker)
+    rgba(0, 0, 0, 0)     // End color (fully transparent)
+  );
+  pointer-events: none;
 
-.holdings-table-container {
-  position: relative;
-}
-
-.table-scroll-wrapper {
-  overflow-x: auto;
-}
-
-.parent-parent-container, .parent-container, .holdings-table-container {
-  outline: 3px solid red;
 }
 
 

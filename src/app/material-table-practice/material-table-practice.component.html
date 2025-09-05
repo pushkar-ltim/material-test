@@ -1,46 +1,36 @@
-<div class="parent-parent-container">
-    <section class="parent-container">
-        <section class="holdings-table-container ">
-            <div class="table-scroll-wrapper">
-                <mat-table [dataSource]="dataSource" multiTemplateDataRows [trackBy]="trackByFn">
+<mat-table [dataSource]="dataSource" multiTemplateDataRows [trackBy]="trackByFn">
 
-                    <ng-container [matColumnDef]="'name'" sticky>
-                        <mat-header-cell *matHeaderCellDef>
-                            name
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let holdingRow">
-                            {{ holdingRow.name }}
-                        </mat-cell>
-                    </ng-container>
+    <ng-container [matColumnDef]="'name'" sticky>
+        <mat-header-cell *matHeaderCellDef>
+            name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let holdingRow" class="shadow-test">
+            {{ holdingRow.name }}
+        </mat-cell>
+    </ng-container>
 
-                    <ng-container *ngFor="let column of moveableColumns">
-                        <ng-container [matColumnDef]="column">
-                            <mat-header-cell *matHeaderCellDef>
-                                {{ column }}
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let holdingRow">
-                                {{ holdingRow[column] }}
-                            </mat-cell>
-                        </ng-container>
-                    </ng-container>
+    <ng-container *ngFor="let column of moveableColumns">
+        <ng-container [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef>
+                {{ column }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let holdingRow">
+                {{ holdingRow[column] }}
+            </mat-cell>
+        </ng-container>
+    </ng-container>
 
-                    <ng-container [matColumnDef]="'toggleAction'" stickyEnd>
-                        <mat-header-cell *matHeaderCellDef>
-                            <button>Toggle</button>
+    <ng-container [matColumnDef]="'toggleAction'" stickyEnd>
+        <mat-header-cell *matHeaderCellDef>
+            <button>Toggle</button>
 
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let holdingRow">
-                            <button>Toggle</button>
-                        </mat-cell>
-                    </ng-container>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let holdingRow">
+            <button>Toggle</button>
+        </mat-cell>
+    </ng-container>
 
-                    <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggleRow(row)"></mat-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggleRow(row)"></mat-row>
 
-                </mat-table>
-            </div>
-
-
-        </section>
-    </section>
-</div>
+</mat-table>
