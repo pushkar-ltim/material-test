@@ -1,36 +1,108 @@
-<mat-table [dataSource]="dataSource" multiTemplateDataRows [trackBy]="trackByFn">
+<div>
 
-    <ng-container [matColumnDef]="'name'" sticky>
-        <mat-header-cell *matHeaderCellDef>
-            name
-        </mat-header-cell>
-        <mat-cell *matCellDef="let holdingRow" class="shadow-test">
-            {{ holdingRow.name }}
-        </mat-cell>
-    </ng-container>
 
-    <ng-container *ngFor="let column of moveableColumns">
-        <ng-container [matColumnDef]="column">
-            <mat-header-cell *matHeaderCellDef>
-                {{ column }}
-            </mat-header-cell>
-            <mat-cell *matCellDef="let holdingRow">
-                {{ holdingRow[column] }}
-            </mat-cell>
-        </ng-container>
-    </ng-container>
+    <div style="border: 2px solid gray; margin: 15px; padding: 10px">
 
-    <ng-container [matColumnDef]="'toggleAction'" stickyEnd>
-        <mat-header-cell *matHeaderCellDef>
-            <button>Toggle</button>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
+            nisi
+            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
 
-        </mat-header-cell>
-        <mat-cell *matCellDef="let holdingRow">
-            <button>Toggle</button>
-        </mat-cell>
-    </ng-container>
+        <hr>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggleRow(row)"></mat-row>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
+            nisi
+            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
 
-</mat-table>
+        <hr>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
+            nisi
+            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+    </div>
+
+    <div style="display: flex; border: 2px solid gray; margin: 15px; padding: 10px; ">
+
+        <div style="border: 2px solid gray; margin: 15px; padding: 10px;">
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam
+                vel nisi
+                id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+
+        </div>
+
+
+        <div class="holdings-table-container" style="border: 2px solid red; margin: 15px;">
+
+            <table mat-table [dataSource]="dataSource" multiTemplateDataRows [trackBy]="trackByFn" class="holdings-table">
+
+                <ng-container [matColumnDef]="'name'" sticky>
+                    <th mat-header-cell *matHeaderCellDef>
+                        name
+                    </th>
+                    <td mat-cell *matCellDef="let holdingRow" class="shadow-test">
+                        {{ holdingRow.name }}
+                    </td>
+                </ng-container>
+
+                <ng-container *ngFor="let column of moveableColumns">
+                    <ng-container [matColumnDef]="column">
+                        <th mat-header-cell *matHeaderCellDef>
+                            {{ column }}
+                        </th>
+                        <td mat-cell *matCellDef="let holdingRow">
+                            {{ holdingRow[column] }}
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container [matColumnDef]="'toggleAction'" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef >
+                        <button>Toggle</button>
+
+                    </th>
+                    <td mat-cell *matCellDef="let holdingRow">
+                        <button>Toggle</button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"  ></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggleRow(row)" [ngClass]="{'holdings-table__row--expanded' : !row.expandable}"></tr>
+
+            </table>
+
+        </div>
+
+
+        <div style="border: 2px solid gray; margin: 15px; padding: 10px;">
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam
+                vel nisi
+                id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+
+        </div>
+
+
+    </div>
+
+
+    <div style="border: 2px solid gray; margin: 15px; padding: 10px">
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
+            nisi
+            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+
+        <hr>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
+            nisi
+            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+
+        <hr>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
+            nisi
+            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+    </div>
+
+
+</div>

@@ -12,6 +12,7 @@ import { MaterialCdkDragDropPracticeComponent } from './material-cdk-drag-drop-p
 import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CssPositionPracticeComponent } from './css-position-practice/css-position-practice.component';
 
 
 
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     MaterialTablePracticeComponent,
-    MaterialCdkDragDropPracticeComponent
+    MaterialCdkDragDropPracticeComponent,
+    CssPositionPracticeComponent
   ],
   imports: [
     BrowserModule,
