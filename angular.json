@@ -103,7 +103,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "dir": "dist/material-test/browser"
+            "dir": "dist/material-test"
           }
         }
       }
