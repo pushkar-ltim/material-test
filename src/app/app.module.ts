@@ -13,6 +13,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CssPositionPracticeComponent } from './css-position-practice/css-position-practice.component';
+import { ScrollTrackerDirective } from './directives/scroll-tracker.directive';
 
 
 
@@ -21,7 +22,8 @@ import { CssPositionPracticeComponent } from './css-position-practice/css-positi
     AppComponent,
     MaterialTablePracticeComponent,
     MaterialCdkDragDropPracticeComponent,
-    CssPositionPracticeComponent
+    CssPositionPracticeComponent,
+    ScrollTrackerDirective
   ],
   imports: [
     BrowserModule,

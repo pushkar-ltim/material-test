@@ -11,9 +11,6 @@ export class MaterialTablePracticeComponent implements OnInit {
 
   constructor(private cd: ChangeDetectorRef) { }
 
-
-
-
   @ViewChild(MatTable) table?: MatTable<HoldingRow>;
 
   //dataSource = HOLDINGS_DATA;
@@ -22,32 +19,16 @@ export class MaterialTablePracticeComponent implements OnInit {
 
   expandedElement: Holding | null | undefined;
 
+  
+  topRowIndex: number = -1;
+
+
   displayedColumns = [
     'name',
     'qty',
     'value',
     'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
-    'qty',
-    'value',
-    'sedol',
+    
     'toggleAction'
   ];
 
@@ -87,6 +68,12 @@ export class MaterialTablePracticeComponent implements OnInit {
     { name: 'value', displayName: 'Value', isSticky: false, isNumeric: true },
     { name: 'toggleAction', displayName: 'Toggle', isSticky: true, isStickyEnd: true }
   ]
+
+  onTopRowChanged(topRow: any) {
+    this.topRowIndex = topRow.index;
+    this.cd.detectChanges();
+  }
+
 
   expandedDetail = ['expandedDetail'];
   // Helper to check if a column should be sticky at the start
