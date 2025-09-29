@@ -21,20 +21,18 @@
 .mdc-data-table__cell,
 .mdc-data-table__header-cell {
   border-bottom-style: none;
+  
 }
 
+.mat-mdc-header-row {
+  background: lightpink  ;
+}
 
 
 .mat-mdc-row {
   min-height: 60px; // Default row height
   transition: height 0.3s ease-in-out;
 }
-
-.mat-mdc-row {
-  min-height: 60px; // Default row height
-  transition: height 0.3s ease-in-out;
-}
-
 
 .mat-mdc-cell {
   padding-top: 10px;
