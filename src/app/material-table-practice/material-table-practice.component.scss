@@ -14,7 +14,7 @@
 }
 
 .mat-mdc-table-sticky {
-  background: lightgray;
+  background: lightpink  ;
   opacity: 1;
 }
 
@@ -30,17 +30,23 @@
   transition: height 0.3s ease-in-out;
 }
 
+.mat-mdc-row {
+  min-height: 60px; // Default row height
+  transition: height 0.3s ease-in-out;
+}
+
+
 .mat-mdc-cell {
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
 .cell-header {
-  font-size: 0.7em;
+  font-size: 0.85em;
   font-weight: bold;
   color: #666;
   opacity: 0;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 .cell-value {
@@ -62,13 +68,13 @@
 .mat-column-toggleAction {
   position: relative;
   overflow: visible;
-  max-width: 5vw;
+  min-width: 5vw;
 }
 
 .mat-column-name {
   position: relative;
   overflow: visible;
-  max-width: 10vw;
+  min-width: 10vw;
 }
 
 

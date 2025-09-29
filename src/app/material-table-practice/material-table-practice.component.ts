@@ -28,7 +28,27 @@ export class MaterialTablePracticeComponent implements OnInit {
     'qty',
     'value',
     'sedol',
-    
+        'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',
     'toggleAction'
   ];
 
