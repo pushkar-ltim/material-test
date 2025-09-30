@@ -1,14 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Holding, HoldingRow, HOLDINGS_DATA } from '../models/holdings.data.model';
 
 @Component({
-  selector: 'app-material-table-practice',
-  templateUrl: './material-table-practice.component.html',
-  styleUrls: ['./material-table-practice.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush 
+  selector: 'app-material-table-practice-sticky-header',
+  templateUrl: './material-table-practice-sticky-header.component.html',
+  styleUrls: ['./material-table-practice-sticky-header.component.scss']
 })
-export class MaterialTablePracticeComponent implements OnInit {
+export class MaterialTablePracticeStickyHeaderComponent {
 
   constructor(private cd: ChangeDetectorRef) { }
 
@@ -155,3 +154,5 @@ export class MaterialTablePracticeComponent implements OnInit {
   }
 
 }
+
+

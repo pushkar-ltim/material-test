@@ -14,6 +14,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CssPositionPracticeComponent } from './css-position-practice/css-position-practice.component';
 import { ScrollTrackerDirective } from './directives/scroll-tracker.directive';
+import { MaterialTablePracticeStickyHeaderComponent } from './material-table-practice-sticky-header/material-table-practice-sticky-header.component';
 
 
 
@@ -23,7 +24,8 @@ import { ScrollTrackerDirective } from './directives/scroll-tracker.directive';
     MaterialTablePracticeComponent,
     MaterialCdkDragDropPracticeComponent,
     CssPositionPracticeComponent,
-    ScrollTrackerDirective
+    ScrollTrackerDirective,
+    MaterialTablePracticeStickyHeaderComponent
   ],
   imports: [
     BrowserModule,
