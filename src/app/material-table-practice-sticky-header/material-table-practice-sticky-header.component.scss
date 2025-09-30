@@ -1,0 +1,118 @@
+.holdings-table-container {
+  overflow-x: scroll;
+}
+
+.floating-header-container {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  background: lightgray; // Match header background
+}
+
+.floating-scroll-container {
+  overflow-x: hidden;
+}
+
+
+.holdings-table {
+
+
+  &__row--expanded {
+    background-color: darkgray;
+    color: white;
+  }
+
+}
+
+.mdc-data-table__cell,
+.mdc-data-table__header-cell {
+  border-bottom-style: none;
+}
+
+
+.mat-mdc-table-sticky {
+  background: lightpink  ;
+  opacity: 1;
+}
+
+.mat-mdc-header-row {
+  background: lightpink  ;
+}
+
+.mat-mdc-row {
+  min-height: 60px; // Default row height
+  transition: height 0.3s ease-in-out;
+}
+
+.mat-mdc-cell {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.cell-header {
+  font-size: 0.7em;
+  font-weight: bold;
+  color: #666;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.cell-value {
+  transition: transform 0.3s ease-in-out;
+}
+
+.top-row {
+
+  .cell-header {
+    height: auto;
+    opacity: 1;
+  }
+
+
+}
+
+
+
+.mat-column-toggleAction {
+  position: relative;
+  overflow: visible;
+  min-width: 5vw;
+}
+
+.mat-column-name {
+  position: relative;
+  overflow: visible;
+  min-width: 10vw;
+}
+
+
+.mat-column-name::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 8px;
+  background: linear-gradient(to right,
+      rgba(0, 0, 0, 0.15), // Start color (darker)
+      rgba(0, 0, 0, 0) // End color (fully transparent)
+    );
+  pointer-events: none;
+
+}
+
+
+.mat-column-toggleAction::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 100%;
+  width: 8px;
+  background: linear-gradient(to left,
+      rgba(0, 0, 0, 0.15), // Start color (darker)
+      rgba(0, 0, 0, 0) // End color (fully transparent)
+    );
+  pointer-events: none;
+
+}
