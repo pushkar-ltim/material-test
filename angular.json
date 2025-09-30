@@ -103,6 +103,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
+            "baseHref": "https://pushkar-ltim.github.io/material-test/",
             "dir": "dist/material-test"
           }
         }
