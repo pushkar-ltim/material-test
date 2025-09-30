@@ -16,7 +16,6 @@
 
 .holdings-table {
 
-
   &__row--expanded {
     background-color: darkgray;
     color: white;
@@ -48,30 +47,6 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
-.cell-header {
-  font-size: 0.7em;
-  font-weight: bold;
-  color: #666;
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-}
-
-.cell-value {
-  transition: transform 0.3s ease-in-out;
-}
-
-.top-row {
-
-  .cell-header {
-    height: auto;
-    opacity: 1;
-  }
-
-
-}
-
-
 
 .mat-column-toggleAction {
   position: relative;

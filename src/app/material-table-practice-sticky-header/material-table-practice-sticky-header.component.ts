@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Holding, HoldingRow, HOLDINGS_DATA } from '../models/holdings.data.model';
 
@@ -12,6 +12,15 @@ export class MaterialTablePracticeStickyHeaderComponent {
   constructor(private cd: ChangeDetectorRef) { }
 
   @ViewChild(MatTable) table?: MatTable<HoldingRow>;
+
+  @ViewChild('mainTable', { read: ElementRef }) mainTable!: ElementRef;
+  @ViewChild('tableContainer', { read: ElementRef }) tableContainer!: ElementRef;
+  @ViewChild('floatingScrollContainer', { read: ElementRef }) floatingScrollContainer!: ElementRef;
+
+  isHeaderSticky = false;
+  tableContainerLeft = 0;
+  tableContainerWidth = 0;
+  private tableContainerTop = 0;
 
   //dataSource = HOLDINGS_DATA;
   dataSource = new MatTableDataSource<HoldingRow>();
@@ -48,6 +57,16 @@ export class MaterialTablePracticeStickyHeaderComponent {
     'value',
     'sedol',    'qty',
     'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
+    'sedol',    'qty',
+    'value',
     'sedol',
     'toggleAction'
   ];
@@ -61,6 +80,70 @@ export class MaterialTablePracticeStickyHeaderComponent {
     'value',
     'sedol',
   ]
+
+    ngAfterViewInit(): void {
+    this.setTableContainerDimensions();
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    const scrollY = window.scrollY;
+    if (scrollY > this.tableContainerTop) {
+      if (!this.isHeaderSticky) {
+        this.isHeaderSticky = true;
+        this.syncColumnWidths();
+        this.cd.detectChanges();
+      }
+    } else {
+      if (this.isHeaderSticky) {
+        this.isHeaderSticky = false;
+        this.cd.detectChanges();
+      }
+    }
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.setTableContainerDimensions();
+    if (this.isHeaderSticky) {
+      this.syncColumnWidths();
+    }
+  }
+  private setTableContainerDimensions() {
+    if (this.tableContainer) {
+      const rect = this.tableContainer.nativeElement.getBoundingClientRect();
+      this.tableContainerLeft = rect.left;
+      this.tableContainerWidth = rect.width;
+      this.tableContainerTop = rect.top + window.scrollY;
+    }
+  }
+
+  private syncColumnWidths() {
+    if (!this.isHeaderSticky || !this.mainTable) return;
+
+    // Defer to ensure the floating header is rendered
+    setTimeout(() => {
+      const mainTableHeaders = this.mainTable.nativeElement.querySelectorAll('th');
+      const floatingTable = this.floatingScrollContainer.nativeElement.querySelector('table');
+      if (!floatingTable) return;
+      const floatingTableHeaders = floatingTable.querySelectorAll('th');
+
+      mainTableHeaders.forEach((th: HTMLElement, i: number) => {
+        if (floatingTableHeaders[i]) {
+          const width = th.getBoundingClientRect().width;
+          floatingTableHeaders[i].style.minWidth = `${width}px`;
+          floatingTableHeaders[i].style.maxWidth = `${width}px`;
+        }
+      });
+    });
+  }
+
+  onTableScroll(event: Event) {
+    if (this.isHeaderSticky && this.floatingScrollContainer) {
+      const target = event.target as HTMLElement;
+      this.floatingScrollContainer.nativeElement.scrollLeft = target.scrollLeft;
+    }
+  }
 
     ngOnInit(): void {
 
@@ -154,5 +237,3 @@ export class MaterialTablePracticeStickyHeaderComponent {
   }
 
 }
-
-

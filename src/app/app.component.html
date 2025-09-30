@@ -1,3 +1,11 @@
-<app-material-table-practice></app-material-table-practice>
+<div>
+  <button (click)="activeComponent = 'practice'">Material Table Practice</button>
+  <button (click)="activeComponent = 'sticky'">Material Table Sticky Header</button>
+</div>
 
-<!-- <app-material-cdk-drag-drop-practice></app-material-cdk-drag-drop-practice> -->
+<div [ngSwitch]="activeComponent">
+  <app-material-table-practice-sticky-header *ngSwitchCase="'sticky'"></app-material-table-practice-sticky-header>
+    <app-material-table-practice *ngSwitchCase="'practice'"></app-material-table-practice>
+
+</div>
+
