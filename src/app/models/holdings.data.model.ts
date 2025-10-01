@@ -31,17 +31,17 @@ export interface Holding {
 export const HOLDINGS_DATA: Holding[] = [
   {
     name: 'Vanguard S&P 500 ETF',
-    sedol: '2193502',
+    sedol: '219350asdfasdfasdfasdfasdfasdf2',
     qty: 150,
     value: 63150.00,
     accounts: [
-      { name: 'Account 11', sedol: '2193502', qty: 100, value: 42100.00 },
+      { name: 'Account 11asdfasdfasdfasdfasdfasdfasdf', sedol: '2193502asdfasdfasdfasdfasdfasdfasdfasdfasdf', qty: 100, value: 42100.00 },
       { name: 'Account 13', sedol: '2193502', qty: 50, value: 21050.00 }
     ]
   },
   {
     name: 'iShares Russell 2000 ETF',
-    sedol: 'B01S1K7',
+    sedol: 'B01asdfasdfS1K7',
     qty: 325,
     value: 61750.00,
     accounts: [

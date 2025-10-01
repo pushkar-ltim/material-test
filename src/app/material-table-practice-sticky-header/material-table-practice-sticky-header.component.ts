@@ -1,6 +1,8 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Holding, HoldingRow, HOLDINGS_DATA } from '../models/holdings.data.model';
+import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-material-table-practice-sticky-header',
@@ -9,7 +11,11 @@ import { Holding, HoldingRow, HOLDINGS_DATA } from '../models/holdings.data.mode
 })
 export class MaterialTablePracticeStickyHeaderComponent {
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor(
+    private cd: ChangeDetectorRef,
+    private scrollDispatcher: ScrollDispatcher,
+    private ngZone: NgZone
+  ) { }
 
   @ViewChild(MatTable) table?: MatTable<HoldingRow>;
 
@@ -28,7 +34,7 @@ export class MaterialTablePracticeStickyHeaderComponent {
 
   expandedElement: Holding | null | undefined;
 
-  
+
   topRowIndex: number = -1;
 
 
@@ -37,35 +43,38 @@ export class MaterialTablePracticeStickyHeaderComponent {
     'qty',
     'value',
     'sedol',
-        'qty',
+    'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 
+    'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 
+    'qty',
     'value',
-    'sedol',    'qty',
+    'sedol', 
+    'qty',
     'value',
     'sedol',
     'toggleAction'
@@ -81,25 +90,74 @@ export class MaterialTablePracticeStickyHeaderComponent {
     'sedol',
   ]
 
-    ngAfterViewInit(): void {
+  private ticking = false;
+  private isSyncing = false; // Flag to prevent scroll event loops
+  private scrollSubscription: Subscription | null = null;
+
+
+  ngAfterViewInit(): void {
     this.setTableContainerDimensions();
+    this.registerScrollListener();
   }
 
+  ngOnDestroy(): void {
+    this.scrollSubscription?.unsubscribe();
+  }
+
+  private registerScrollListener() {
+    this.scrollSubscription = this.scrollDispatcher.scrolled().subscribe((scrollable: CdkScrollable | void) => {
+      this.ngZone.run(() => {
+        // Handle window scroll for sticky header
+        const scrollY = window.scrollY;
+        const shouldBeSticky = scrollY > this.tableContainerTop;
+        if (shouldBeSticky !== this.isHeaderSticky) {
+          this.isHeaderSticky = shouldBeSticky;
+          if (this.isHeaderSticky) {
+            this.syncColumnWidths();
+          }
+          this.cd.detectChanges();
+        }
+
+        // Handle horizontal table scroll for sync
+        if (scrollable) {
+          const element = scrollable.getElementRef().nativeElement;
+          // Check if the scroll event is from our main table container
+          if (this.tableContainer.nativeElement.contains(element) && !this.isSyncing) {
+            this.syncScroll(element, this.floatingScrollContainer.nativeElement);
+          }
+          // Check if the scroll event is from our floating scrollbar
+          if (this.floatingScrollContainer.nativeElement.contains(element) && !this.isSyncing) {
+            this.syncScroll(element, this.tableContainer.nativeElement);
+          }
+        }
+      });
+    });
+  }
+  
   @HostListener('window:scroll')
   onWindowScroll() {
-    const scrollY = window.scrollY;
-    if (scrollY > this.tableContainerTop) {
-      if (!this.isHeaderSticky) {
-        this.isHeaderSticky = true;
-        this.syncColumnWidths();
+
+    if (this.ticking) return;
+
+    window.requestAnimationFrame(() => {
+
+      console.log("scroll methods called");
+
+      const scrollY = window.scrollY;
+      const shouldBeSticky = scrollY > this.tableContainerTop;
+      if (shouldBeSticky !== this.isHeaderSticky) {
+        this.isHeaderSticky = shouldBeSticky;
+        if (this.isHeaderSticky) {
+          this.syncColumnWidths();
+        }
         this.cd.detectChanges();
       }
-    } else {
-      if (this.isHeaderSticky) {
-        this.isHeaderSticky = false;
-        this.cd.detectChanges();
-      }
-    }
+
+      this.ticking = false;
+    });
+
+    this.ticking = true;
+
   }
 
   @HostListener('window:resize')
@@ -138,14 +196,36 @@ export class MaterialTablePracticeStickyHeaderComponent {
     });
   }
 
+
+ 
   onTableScroll(event: Event) {
-    if (this.isHeaderSticky && this.floatingScrollContainer) {
-      const target = event.target as HTMLElement;
-      this.floatingScrollContainer.nativeElement.scrollLeft = target.scrollLeft;
+    if (this.isHeaderSticky && !this.isSyncing) {
+      this.syncScroll(event.target as HTMLElement, this.floatingScrollContainer.nativeElement);
     }
   }
 
-    ngOnInit(): void {
+
+  private syncScroll(source: HTMLElement, destination: HTMLElement) {
+    this.isSyncing = true;
+
+    const scrollableWidth = source.scrollWidth - source.clientWidth;
+    
+    // Avoid division by zero
+    if (scrollableWidth > 0) {
+      const ratio = source.scrollLeft / scrollableWidth;
+      const destScrollableWidth = destination.scrollWidth - destination.clientWidth;
+      destination.scrollLeft = Math.round(ratio * destScrollableWidth);
+    }
+
+    // Use requestAnimationFrame to reset the flag after the current frame,
+    // preventing the other element's scroll event from re-triggering the sync.
+    requestAnimationFrame(() => {
+      this.isSyncing = false;
+    });
+  }
+
+
+  ngOnInit(): void {
 
     const rows: HoldingRow[] = [];
 
@@ -221,14 +301,12 @@ export class MaterialTablePracticeStickyHeaderComponent {
       }
       allRows.splice(parentIndex + 1, childCount);
     }
-    
-    setTimeout(() => {}, 0)
 
     this.dataSource.data = allRows;
 
     this.cd.detectChanges();
 
-    if(this.table) {
+    if (this.table) {
       console.log("table", this.table);
       this.table.renderRows();
     }
