@@ -3,59 +3,50 @@
 
     <div style="border: 2px solid gray; margin: 15px; padding: 10px">
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
             nisi
-            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!
+        </p>
 
         <hr>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
             nisi
-            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!
+        </p>
 
         <hr>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
             nisi
-            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!
+        </p>
+
     </div>
 
-    <div #floatingHeaderContainer *ngIf="isHeaderSticky" class="floating-header-container" [style.left.px]="tableContainerLeft" [style.width.px]="tableContainerWidth">
-        <div #floatingScrollContainer class="floating-scroll-container">
-            <table mat-table [dataSource]="dataSource" class="holdings-table">
-                <!-- Replicate all column definitions here for the floating header -->
-                <ng-container [matColumnDef]="'name'" sticky>
-                    <th mat-header-cell *matHeaderCellDef> name </th>
-                </ng-container>
-
-                <ng-container *ngFor="let column of moveableColumns;">
-                    <ng-container [matColumnDef]="column">
-                        <th mat-header-cell *matHeaderCellDef> {{ column }} </th>
-                    </ng-container>
-                </ng-container>
-
-                <ng-container [matColumnDef]="'toggleAction'" stickyEnd>
-                    <th mat-header-cell *matHeaderCellDef> <button>Toggle</button> </th>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
-            </table>
-        </div>
-    </div>
 
     <div style="display: flex; border: 2px solid gray; margin: 15px; padding: 10px; ">
 
         <div style="border: 2px solid gray; margin: 15px; padding: 10px; max-width: 5vw;">
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam
                 vel nisi
-                id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+                id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!
+            </p>
 
         </div>
 
 
 
-   <div #tableContainer class="holdings-table-container" style="margin: 15px; flex-grow: 1;" (scroll)="onTableScroll($event)">
+   <div class="holdings-table-container" style="margin: 15px; flex-grow: 1;">
+
+            <div id="sticky-div" style="position: fixed; top: 0; background: red;">
+                Div to display when the table's header moves past the vieport's top edge
+            </div>
 
             <table #mainTable mat-table [dataSource]="dataSource" class="holdings-table" [trackBy]="trackByFn">
 
@@ -63,7 +54,7 @@
                     <th mat-header-cell *matHeaderCellDef>
                         name
                     </th>
-                    <td mat-cell *matCellDef="let holdingRow" class="shadow-test">
+                    <td mat-cell *matCellDef="let holdingRow">
                         {{ holdingRow.name }}
                     </td>
                 </ng-container>
@@ -90,7 +81,7 @@
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"  ></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggleRow(row)" [ngClass]="{'holdings-table__row--expanded' : !row.expandable}"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
             </table>
 
@@ -111,21 +102,28 @@
 
     <div style="border: 2px solid gray; margin: 15px; padding: 10px">
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
             nisi
-            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!
+        </p>
 
         <hr>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
             nisi
-            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!
+        </p>
 
         <hr>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est facilis, officiis soluta inventore aperiam vel
             nisi
-            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!</p>
+            id iure expedita sit illum totam architecto omnis sequi quo quaerat voluptas maxime dolorum!
+        </p>
+
     </div>
 
 
