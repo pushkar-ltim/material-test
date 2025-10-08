@@ -24,6 +24,7 @@ export class MaterialTablePracticeStickyHeaderComponent {
   @ViewChild('tableContainer', { read: ElementRef }) tableContainer!: ElementRef;
   @ViewChild('floatingScrollContainer', { read: ElementRef }) floatingScrollContainer!: ElementRef;
   @ViewChild('stickyDiv') stickyDiv?: ElementRef<HTMLDivElement>;
+  @ViewChild('mainTableHeaderRow') mainTableHeaderRow!: ElementRef;
 
   private headerObserver?: IntersectionObserver;
 
@@ -107,7 +108,11 @@ export class MaterialTablePracticeStickyHeaderComponent {
     this.cd.markForCheck();
   }
 
-  ngAfterViewInit(): void {
+ ngAfterViewInit(): void {
+    setTimeout(() => this.setupStickyHeaderObserver());
+  }
+
+  private setupStickyHeaderObserver(): void {
     const tableElement = this.mainTable?.nativeElement;
     const stickyDivElement = this.stickyDiv?.nativeElement;
 
@@ -115,7 +120,9 @@ export class MaterialTablePracticeStickyHeaderComponent {
       return;
     }
 
-    const headerRow = tableElement.querySelector('tr.mat-header-row');
+    const headerRow = this.mainTableHeaderRow.nativeElement;
+
+    console.log('headerRow', headerRow);
 
     if (!headerRow) {
       return;
@@ -127,7 +134,7 @@ export class MaterialTablePracticeStickyHeaderComponent {
     };
 
     this.headerObserver = new IntersectionObserver(([entry]) => {
-      this.ngZone.run(() => {
+      this.ngZone.runOutsideAngular(() => {
         this.isHeaderSticky = !entry.isIntersecting;
         stickyDivElement.style.display = this.isHeaderSticky ? 'block' : 'none';
         this.cd.markForCheck();
