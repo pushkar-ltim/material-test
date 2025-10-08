@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Holding, HoldingRow, HOLDINGS_DATA } from '../models/holdings.data.model';
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
@@ -7,7 +7,8 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-material-table-practice-sticky-header',
   templateUrl: './material-table-practice-sticky-header.component.html',
-  styleUrls: ['./material-table-practice-sticky-header.component.scss']
+  styleUrls: ['./material-table-practice-sticky-header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MaterialTablePracticeStickyHeaderComponent {
 
@@ -22,11 +23,13 @@ export class MaterialTablePracticeStickyHeaderComponent {
   @ViewChild('mainTable', { read: ElementRef }) mainTable!: ElementRef;
   @ViewChild('tableContainer', { read: ElementRef }) tableContainer!: ElementRef;
   @ViewChild('floatingScrollContainer', { read: ElementRef }) floatingScrollContainer!: ElementRef;
+  @ViewChild('stickyDiv') stickyDiv?: ElementRef<HTMLDivElement>;
+
+  private headerObserver?: IntersectionObserver;
 
   isHeaderSticky = false;
   tableContainerLeft = 0;
   tableContainerWidth = 0;
-  private tableContainerTop = 0;
 
   //dataSource = HOLDINGS_DATA;
   dataSource = new MatTableDataSource<HoldingRow>();
@@ -34,9 +37,7 @@ export class MaterialTablePracticeStickyHeaderComponent {
 
   expandedElement: Holding | null | undefined;
 
-
   topRowIndex: number = -1;
-
 
   displayedColumns = [
     'name',
@@ -67,13 +68,13 @@ export class MaterialTablePracticeStickyHeaderComponent {
     'value',
     'sedol', 'qty',
     'value',
-    'sedol', 
+    'sedol',
     'qty',
     'value',
-    'sedol', 
+    'sedol',
     'qty',
     'value',
-    'sedol', 
+    'sedol',
     'qty',
     'value',
     'sedol',
@@ -91,9 +92,7 @@ export class MaterialTablePracticeStickyHeaderComponent {
   ]
 
   ngOnInit(): void {
-
     const rows: HoldingRow[] = [];
-
 
     this.originalData.forEach(holding => {
       rows.push({
@@ -106,7 +105,42 @@ export class MaterialTablePracticeStickyHeaderComponent {
 
     this.dataSource.data = rows;
     this.cd.markForCheck();
+  }
 
+  ngAfterViewInit(): void {
+    const tableElement = this.mainTable?.nativeElement;
+    const stickyDivElement = this.stickyDiv?.nativeElement;
+
+    if (!tableElement || !stickyDivElement) {
+      return;
+    }
+
+    const headerRow = tableElement.querySelector('tr.mat-header-row');
+
+    if (!headerRow) {
+      return;
+    }
+
+    const options = {
+      root: null, // relative to the viewport
+      threshold: 0 // trigger as soon as the element is partially out of view
+    };
+
+    this.headerObserver = new IntersectionObserver(([entry]) => {
+      this.ngZone.run(() => {
+        this.isHeaderSticky = !entry.isIntersecting;
+        stickyDivElement.style.display = this.isHeaderSticky ? 'block' : 'none';
+        this.cd.markForCheck();
+      });
+    }, options);
+
+    this.headerObserver.observe(headerRow);
+  }
+
+  ngOnDestroy(): void {
+    if (this.headerObserver) {
+      this.headerObserver.disconnect();
+    }
   }
 
   columnConfig = [
@@ -116,6 +150,7 @@ export class MaterialTablePracticeStickyHeaderComponent {
     { name: 'value', displayName: 'Value', isSticky: false, isNumeric: true },
     { name: 'toggleAction', displayName: 'Toggle', isSticky: true, isStickyEnd: true }
   ]
+
   expandedDetail = ['expandedDetail'];
   // Helper to check if a column should be sticky at the start
   isSticky(columnName: string): boolean {
